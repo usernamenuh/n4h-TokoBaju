@@ -8,12 +8,21 @@
                 <h3>Tambah Data Baju</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('baju.store') }}" method="POST">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form action="{{ route('baju.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-2">
-                        <label for="nama">Nama</label>
-                        <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan nama">
-                        @error('nama')
+                        <label for="name">Nama</label>
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Masukkan nama" value="{{ old('name') }}">
+                        @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -23,8 +32,8 @@
                         <label for="type">Type</label>
                         <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
                             <option value="">Type</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="male" {{ old('type', $baju->type ?? '') == 'male' ? 'selected' : '' }}>Male</option>
+                            <option value="female" {{ old('type', $baju->type ?? '') == 'female' ? 'selected' : '' }}>Female</option>
                         </select>
                         @error('type')
                             <div class="invalid-feedback">
@@ -34,31 +43,34 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="size">Size</label>
-                        <select name="size" id="size" class="form-control @error('size') is-invalid @enderror">
-                            <option value="">Size</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="XL">XL</option>
-                            <option value="XXL">XXL</option>
-                        </select>
+                        <select name="size" class="form-select">
+                        <option value="">Pilih Size</option>
+    @foreach (['S', 'M', 'L', 'XL', 'XXL'] as $size)
+        <option value="{{ $size }}" {{ old('size', $baju->size ?? '') == $size ? 'selected' : '' }}>
+            {{ $size }}
+        </option>
+    @endforeach
+</select>
                         @error('size')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group mb-2">
-                        <label for="decription">Description</label>
-                        <textarea name="description" id="description" cols="30" rows="10" class="form-control @error('description') is-invalid @enderror"></textarea>
-                        @error('description')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+                    <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control @error('description') is-invalid @enderror"
+              id="description"
+              name="description"
+              rows="4"
+              placeholder="Enter description here">{{ old('description', $baju->description ?? '') }}</textarea>
+    @error('description')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
                     <div class="form-group mb-2">
                         <label for="price">Price</label>
-                        <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" id="price" placeholder="Masukkan harga">
+                        <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" id="price" placeholder="Masukkan harga" value="{{ old('price') }}">
                         @error('price')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -67,7 +79,7 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="stock">Stock</label>
-                        <input type="number" name="stock" class="form-control @error('stock') is-invalid @enderror" id="stock" placeholder="Masukkan stock">
+                        <input type="number" name="stock" class="form-control @error('stock') is-invalid @enderror" id="stock" placeholder="Masukkan stock" value="{{ old('stock') }}">
                         @error('stock')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -76,11 +88,11 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="status">Status</label>
-                        <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
-                            <option value="">Status</option>
-                            <option value="available">Available</option>
-                            <option value="unavailable">Unavailable</option>
-                        </select>
+                        <select name="status" class="form-select">
+    <option value="">Pilih Status</option>
+    <option value="available" {{ old('status', $baju->status ?? '') == 'available' ? 'selected' : '' }}>Available</option>
+    <option value="unavailable" {{ old('status', $baju->status ?? '') == 'unavailable' ? 'selected' : '' }}>Unavailable</option>
+</select>
                         @error('status')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -96,9 +108,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="card-footer d-flex justify-content-end m-3">
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
                 </form>
             </div>
         </div>

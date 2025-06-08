@@ -33,7 +33,7 @@
                                 <td>{{ $satu->size }}</td>
                                 <td>{{ $satu->description }}</td>
                                 <td>{{ $satu->price }}</td>
-                                <td>{{ $satu->stok }}</td>
+                                <td>{{ $satu->stock }}</td>
                                 <td>{{ $satu->status }}</td>
                                 <td><img src="{{ asset('storage/' . $satu->image) }}" alt="" width="100px"></td>
                                 <td class="text-center">

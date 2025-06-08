@@ -16,11 +16,11 @@ class BajuController extends Controller
         return view('baju.create');
     }
     public function store(Request $request) {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|max:255|String',
             'type' => 'required|in:male,female',
             'size' => 'required|in:S,M,L,XL,XXL',
-            'image' => 'required|String|max:255|mimes:jpg,jpeg,png,svg|max:2048',
+            'image' => 'required|mimes:jpg,jpeg,png,svg|max:2048',
             'description' => 'required|String|max:255',
             'price' => 'required|Integer',
             'stock' => 'required|Integer|min:1',
@@ -34,7 +34,6 @@ class BajuController extends Controller
             'size.required' => 'Ukuran tidak boleh kosong',
             'size.in' => 'Ukuran harus berupa S, M, L, XL, XXL',
             'image.required' => 'Gambar tidak boleh kosong',
-            'image.String' => 'Gambar harus berupa string',
             'image.mimes' => 'Gambar harus berupa jpg, jpeg, png, svg',
             'image.max' => 'Gambar maksimal 2048 KB',
             'description.required' => 'Deskripsi tidak boleh kosong',
@@ -48,10 +47,12 @@ class BajuController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $request->file('image')->store('public/images');
-            $validated['image'] = $request->image;
+            // Simpan file ke storage/app/public/images
+            $imagePath = $request->file('image')->store('images', 'public'); // 'public' adalah disk
+            $validated['image'] = $imagePath; // contoh: images/nama-file.jpg
         }
-        baju::create($request->all());
+
+        baju::create($validated);
         return redirect()->route('baju.index')->with('success', 'Data berhasil ditambahkan');
     }
 }
