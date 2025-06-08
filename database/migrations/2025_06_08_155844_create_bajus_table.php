@@ -18,8 +18,8 @@ return new class extends Migration
             $table->enum('size', ['S', 'M', 'L', 'XL', 'XXL']);
             $table->string('image')->nullable();
             $table->string('description');
-            $table->string('price');
-            $table->string('stock');
+            $table->integer('price');
+            $table->integer('stock');
             $table->enum('status', ['available', 'unavailable'])->default('available');
             $table->timestamps();
         });
