@@ -31,7 +31,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ asset('baju/baju.index') }}">Baju</a>
+                            <a class="nav-link" href="{{ asset('baju') }}">Baju</a>
                         </li>
                     </ul>
 
