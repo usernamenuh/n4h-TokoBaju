@@ -10,15 +10,16 @@
             <div class="card-body">
                 <form action="{{ route('baju.store') }}" method="POST">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="nama">Nama</label>
                         <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan nama">
                         @error('nama')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
+                        @enderror
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="type">Type</label>
                         <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
                             <option value="">Type</option>
@@ -31,7 +32,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="size">Size</label>
                         <select name="size" id="size" class="form-control @error('size') is-invalid @enderror">
                             <option value="">Size</option>
@@ -46,7 +47,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="decription">Description</label>
                         <textarea name="description" id="description" cols="30" rows="10" class="form-control @error('description') is-invalid @enderror"></textarea>
                         @error('description')
@@ -55,7 +56,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="price">Price</label>
                         <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" id="price" placeholder="Masukkan harga">
                         @error('price')
@@ -64,7 +65,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="stock">Stock</label>
                         <input type="number" name="stock" class="form-control @error('stock') is-invalid @enderror" id="stock" placeholder="Masukkan stock">
                         @error('stock')
@@ -73,7 +74,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
                             <option value="">Status</option>
@@ -86,7 +87,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="image">Image</label>
                         <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="image">
                         @error('image')
@@ -95,7 +96,9 @@
                             </div>
                         @enderror
                     </div>
+                    <div class="card-footer d-flex justify-content-end m-3">
                     <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </form>
             </div>
         </div>

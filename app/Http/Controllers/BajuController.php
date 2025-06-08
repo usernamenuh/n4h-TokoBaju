@@ -18,21 +18,21 @@ class BajuController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required|max:255|String',
-            'type' => 'required|Enum:male,female',
-            'size' => 'required|Enum:S,M,L,XL,XXL',
+            'type' => 'required|in:male,female',
+            'size' => 'required|in:S,M,L,XL,XXL',
             'image' => 'required|String|max:255|mimes:jpg,jpeg,png,svg|max:2048',
             'description' => 'required|String|max:255',
             'price' => 'required|Integer',
             'stock' => 'required|Integer|min:1',
-            'status' => 'required|Enum:available,unavailable',
+            'status' => 'required|in:available,unavailable',
         ], [
             'name.required' => 'Nama tidak boleh kosong',
             'name.max' => 'Nama maksimal 255 karakter',
             'name.String' => 'Nama harus berupa string',
             'type.required' => 'Jenis tidak boleh kosong',
-            'type.Enum' => 'Jenis harus berupa male atau female',
+            'type.in' => 'Jenis harus berupa male atau female',
             'size.required' => 'Ukuran tidak boleh kosong',
-            'size.Enum' => 'Ukuran harus berupa S, M, L, XL, XXL',
+            'size.in' => 'Ukuran harus berupa S, M, L, XL, XXL',
             'image.required' => 'Gambar tidak boleh kosong',
             'image.String' => 'Gambar harus berupa string',
             'image.mimes' => 'Gambar harus berupa jpg, jpeg, png, svg',
@@ -44,7 +44,7 @@ class BajuController extends Controller
             'stock.required' => 'Stok tidak boleh kosong',
             'stock.min' => 'Stok minimal 1',
             'status.required' => 'Status tidak boleh kosong',
-            'status.Enum' => 'Status harus berupa available atau unavailable',
+            'status.in' => 'Status harus berupa available atau unavailable',
         ]);
 
         if ($request->hasFile('image')) {
