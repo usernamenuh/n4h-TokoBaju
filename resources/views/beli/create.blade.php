@@ -120,7 +120,7 @@
         </div>
     </div>
 
-    {{-- JavaScript untuk kalkulasi total --}}
+   {{--KAlKULATOR--}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const jumlahInput = document.getElementById('jumlah');
