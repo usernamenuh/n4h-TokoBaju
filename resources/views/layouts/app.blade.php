@@ -33,6 +33,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ asset('baju') }}">Baju</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ asset('beli') }}">Sepatu</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
