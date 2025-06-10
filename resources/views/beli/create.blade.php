@@ -27,7 +27,7 @@
                                 <select name="baju_id" id="baju_id" class="form-control">
                                     <option value="">Pilih Baju</option>
                                     @foreach($baju as $b)
-                                        <option value="{{ $b->id }}">{{ $b->nama }} - Stok: {{ $b->stok }}</option>
+                                        <option value="{{ $b->id }}">{{ $b->name }} - Stok: {{ $b->stock }}</option>
                                     @endforeach
                                 </select>
                             </div>

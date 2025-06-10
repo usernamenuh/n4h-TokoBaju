@@ -35,7 +35,7 @@ public function store(Request $request)
     ]);
 
     // Ambil data baju
-    $baju = baju::findOrFail($request->baju_id);
+    $baju = baju::findOrFail($request->bajus_id);
 
     // Cek stok tersedia
     if ($baju->stok < $request->jumlah) {
@@ -50,7 +50,7 @@ public function store(Request $request)
     $beli = new beli;
     $beli->jumlah = $request->jumlah;
     $beli->harga = $request->harga;
-    $beli->baju_id = $request->baju_id;
+    $beli->bajus_id = $request->bajus_id;
     $beli->save();
 
     return redirect()->route('beli.index')->with('success', 'Pembelian berhasil dilakukan');
