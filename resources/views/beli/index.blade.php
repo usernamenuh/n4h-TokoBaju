@@ -118,8 +118,6 @@
             </div>
         </div>
     </div>
-
-    {{-- Script untuk tooltip --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize tooltips
