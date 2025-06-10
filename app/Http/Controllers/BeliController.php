@@ -10,15 +10,13 @@ class BeliController extends Controller
 {
     public function index()
     {
-        $beli = beli::all();
-        $baju = baju::all();
-        return view('beli.index', compact('beli', 'baju'));
+        $beli = beli::with('baju')->latest()->get(); // ✅ ambil data pembelian dan bajunya
+        return view('beli.index', compact('beli'));
     }
 
     public function create() {
-        $beli = beli::all();
         $baju = baju::all();
-        return view('beli.create', compact('beli', 'baju'));
+        return view('beli.create', compact('baju'));
     }
 
 public function store(Request $request)
@@ -35,22 +33,22 @@ public function store(Request $request)
     ]);
 
     // Ambil data baju
-    $baju = baju::findOrFail($request->bajus_id);
+    $baju = baju::findOrFail($request->baju_id);
 
     // Cek stok tersedia
-    if ($baju->stok < $request->jumlah) {
+    if ($baju->stock < $request->jumlah) {
         return back()->with('error', 'Stok tidak mencukupi');
     }
 
     // Update stok baju
-    $baju->stok -= $request->jumlah;
+    $baju->stock -= $request->jumlah;
     $baju->save();
 
     // Simpan data pembelian
     $beli = new beli;
     $beli->jumlah = $request->jumlah;
     $beli->harga = $request->harga;
-    $beli->bajus_id = $request->bajus_id;
+    $beli->baju_id = $request->baju_id;
     $beli->save();
 
     return redirect()->route('beli.index')->with('success', 'Pembelian berhasil dilakukan');

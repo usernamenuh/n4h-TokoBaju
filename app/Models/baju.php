@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +10,7 @@ class baju extends Model
 
     public function beli()
     {
-        return $this->belongsTo(beli::class);
+        return $this->hasMany(beli::class); // ✅ yang benar
     }
 }
+
