@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('belis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('bajus_id')->constrained('bajus')->cascadeOnDelete()->nullable();
+            $table->Integer('jumlah');
+            $table->string('harga');
             $table->timestamps();
         });
     }
