@@ -19,5 +19,16 @@ class PelangganController extends Controller
         return view('pelanggan.create', compact('pelanggan'));
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|max:255|string',
+            'email' => 'required|email|unique:pelanggans',
+            'no_hp' => 'required|integer',
+            'user_id' => 'required|exists:users,id'
+        ]);
 
+        $pelanggan = pelanggan::create($request->all());
+        return redirect()->route('pelanggan.index')->with('success', 'Pelanggan berhasil ditambahkan');
+    }
 }
