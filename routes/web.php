@@ -1,4 +1,4 @@
-<?php
+11<?php
 
 use Illuminate\Support\Facades\Route;
 
@@ -11,4 +11,3 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('baju', App\Http\Controllers\BajuController::class);
-Route::resource('beli', App\Http\Controllers\BeliController::class);
